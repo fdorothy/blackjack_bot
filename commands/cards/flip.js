@@ -4,7 +4,7 @@ const { Deck } = require('../../src/deck');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('flip')
-    .setDescription('Flips a card over from the deck, revealing it to the other players.'),
+    .setDescription('Draw and reveal a card from the deck.'),
   async execute(interaction, deck) {
     let card = deck.draw();
     if (card) {
