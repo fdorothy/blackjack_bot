@@ -2,9 +2,10 @@
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const fs = require('node:fs')
 const path = require('node:path')
+const { State } = require('./src/state');
 
 const token = process.env.DISCORD_TOKEN;
-
+const state = new State();
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -31,7 +32,6 @@ for (const folder of commandFolders) {
 
 client.on(Events.InteractionCreate, async interaction => {
   if (!interaction.isChatInputCommand()) return;
-  console.log(interaction);
 
   const command = interaction.client.commands.get(interaction.commandName);
 
@@ -40,8 +40,10 @@ client.on(Events.InteractionCreate, async interaction => {
     return;
   }
 
+  let deck = state.get_or_create_deck(interaction.guild.id);
+
   try {
-    await command.execute(interaction);
+    await command.execute(interaction, deck);
   } catch (error) {
     console.error(error);
     if (interaction.replied || interaction.deferred) {
