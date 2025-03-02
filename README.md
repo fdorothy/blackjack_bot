@@ -14,6 +14,7 @@ This uses a standard 52-card deck without jokers.
 /shuffle - Returns all cards to the deck and shuffles them.
 /draw - Draws a card from the deck, without revealing it to the other players.
 /flip - Draw and reveal a card from the deck.
+/hand - Shows all the cards in your hand without revealing them to other players.
 /table - Shows all the cards on the table, but not the face-down cards.
 /reveal - Reveals all of the cards that have been drawn or flipped for each player.
 ```

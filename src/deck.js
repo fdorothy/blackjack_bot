@@ -148,6 +148,28 @@ class Deck {
       return "No cards were dealt";
     }
   }
+
+  hand_human_readable(id) {
+    if (this.hands.hasOwnProperty(id)) {
+      let rows = [];
+      const cards = this.hands[id];
+      cards.forEach(info => {
+        if (info.hidden) {
+          rows.push(`${Deck.human_readable(info.card)} (hidden)`);
+        } else {
+          rows.push(`${Deck.human_readable(info.card)}`);
+        }
+      });
+      if (rows.length > 0) {
+        let str = rows.join(', ');
+        return `Your cards: ${str}`;
+      } else {
+        return `Your hand is empty.`;
+      }
+    } else {
+      return "No cards were dealt to you.";
+    }
+  }
 }
 
 export { Deck };
